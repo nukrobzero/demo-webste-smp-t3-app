@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { api } from "~/utils/api";
 
 const PagesDash: NextPage = () => {
+  const showPageData = api.pagesDash.getAllPage.useQuery();
   const submitPages = api.pagesDash.createPage.useMutation();
 
   const [showForm, setShowForm] = useState(false);
@@ -18,13 +19,21 @@ const PagesDash: NextPage = () => {
         title: title,
       })
       .catch(console.error);
-      setShowForm(false)
+    setShowForm(false);
   };
+
+  const page = showPageData.data;
+
 
   return (
     <div>
       <div>
         <h1>Pages</h1>
+        <ul>
+          {page?.map((data: any) => (
+            <li key={data.id}>{data.title}</li>
+          ))}
+        </ul>
       </div>
       <div>
         <button onClick={() => setShowForm(true)}>Add New Page</button>

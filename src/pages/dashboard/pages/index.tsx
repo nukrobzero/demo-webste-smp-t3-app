@@ -43,6 +43,7 @@ const PagesDash: NextPage = () => {
   };
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     updatePage
       .mutateAsync({
         id: values.id,

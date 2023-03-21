@@ -51,6 +51,7 @@ const PagesDash: NextPage = () => {
       })
       .then(() => {
         setShowForm(false);
+        setCheckEdit(0)
         showPageData.refetch();
       })
       .catch(console.error);

@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import FormDashbord from "~/components/dashboard/form-template";
 
@@ -51,7 +52,7 @@ const PagesDash: NextPage = () => {
       })
       .then(() => {
         setShowForm(false);
-        setCheckEdit(0)
+        setCheckEdit(0);
         showPageData.refetch();
       })
       .catch(console.error);
@@ -71,7 +72,7 @@ const PagesDash: NextPage = () => {
   return (
     <div>
       <div>
-        <h1>SubPages</h1>
+        <h1>Service</h1>
         <div className="flex h-full w-full items-center justify-center">
           <table className=" w-[800px] text-left text-sm text-gray-500 dark:text-gray-400">
             <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
@@ -97,7 +98,9 @@ const PagesDash: NextPage = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    {data.title}
+                    <Link href={`/dashboard/service/${data.title}`}>
+                      {data.title}
+                    </Link>
                   </td>
                   <td className="px-6 py-4">
                     <button

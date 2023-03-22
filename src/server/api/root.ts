@@ -1,6 +1,7 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { exampleRouter } from "~/server/api/routers/example";
 import { pagesDashRouter } from "./routers/pagesDash";
+import { subPageService } from "./routers/subPageService";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { pagesDashRouter } from "./routers/pagesDash";
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
   pagesDash: pagesDashRouter,
+  subPageService: subPageService,
 });
 
 // export type definition of API

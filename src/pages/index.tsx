@@ -24,6 +24,7 @@ const Home: NextPage = () => {
             <p className="text-2xl text-white">
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
             </p>
+            <p className=" text-white"><Link href={`/home`}>Home</Link></p>
             <AuthShowcase />
           </div>
         </div>

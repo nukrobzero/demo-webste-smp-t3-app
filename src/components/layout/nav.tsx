@@ -12,6 +12,7 @@ export default function Navbar() {
     <nav className="justify-items-centers mx-auto flex h-[80px] max-w-7xl items-center justify-between">
       <div>
         <Link href={`/home`}>logo</Link>
+        <Link href={`/dashboard`} className="ml-5">dashboard</Link>
       </div>
       <div>
         <ul className="flex cursor-pointer flex-row items-center justify-between gap-4">

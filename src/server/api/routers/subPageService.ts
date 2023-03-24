@@ -7,24 +7,16 @@ import {
 } from "~/server/api/trpc";
 
 export const subPageService = createTRPCRouter({
-  getAllPage: publicProcedure.query(({ ctx, input }) => {
-    return ctx.prisma.subpages.findMany({
-      where: {
-        pagesId: input,
-      },
-    });
-  }),
-
-  getSinglePage: publicProcedure
+  getPageByPageID: publicProcedure
     .input(
       z.object({
-        pageId: z.string(),
+        pagesId: z.string(),
       })
     )
-    .query(({ input, ctx }) => {
-      return ctx.prisma.subpages.findUnique({
+    .query(({ ctx, input }) => {
+      return ctx.prisma.subpages.findMany({
         where: {
-          id: input.pageId,
+          pagesId: input.pagesId,
         },
       });
     }),

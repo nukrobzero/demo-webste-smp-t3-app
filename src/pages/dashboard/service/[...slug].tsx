@@ -20,12 +20,14 @@ export const getIDFromURL = () => {
 const Subpages: NextPage = () => {
   const pageIDs: any = getIDFromURL();
 
-  const showPageData = api.subPageService.getAllPage.useQuery(pageIDs);
+  const showPageData = api.subPageService.getPageByPageID.useQuery({
+    pagesId: pageIDs,
+  });
   const submitPages = api.subPageService.createSubPage.useMutation();
   const deletePage = api.pagesDash.deletePage.useMutation();
   const updatePage = api.pagesDash.updatePage.useMutation();
   const page = showPageData?.data;
-  console.log(page)
+  console.log(page);
 
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");

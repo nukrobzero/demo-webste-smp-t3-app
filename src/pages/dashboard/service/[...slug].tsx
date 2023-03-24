@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import FormDashbord from "~/components/dashboard/form-template";
+import { signIn, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
@@ -13,8 +13,8 @@ export const getIDFromURL = () => {
   const showPageData = api.pagesDash.getAllPage.useQuery();
   const pages = showPageData.data;
   const matchingData = pages?.find((item) => item.title === slug?.toString());
-
-  return matchingData?.id || "";
+  const matchID = matchingData?.id;
+  return matchID;
 };
 
 const Subpages: NextPage = () => {
@@ -85,6 +85,19 @@ const Subpages: NextPage = () => {
       .catch(console.error);
   };
 
+  const { data: sessionData } = useSession();
+
+  if (!sessionData) {
+    return (
+      <button
+        className="rounded-full bg-black/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-black/20"
+        onClick={() => void signIn()}
+      >
+        {"Sign in"}
+      </button>
+    );
+  }
+
   return (
     <div>
       <div>
@@ -114,9 +127,7 @@ const Subpages: NextPage = () => {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                   >
-                    <Link href={`/dashboard/service/${data.title}`}>
-                      {data.title}
-                    </Link>
+                    {data.title}
                   </td>
                   <td className="px-6 py-4">
                     <button

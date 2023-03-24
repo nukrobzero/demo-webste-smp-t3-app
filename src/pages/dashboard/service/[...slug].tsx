@@ -6,19 +6,16 @@ import { signIn, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
-export const getIDFromURL = () => {
+const Subpages: NextPage = () => {
   const router = useRouter();
   const slug = router.query.slug;
 
-  const showPageData = api.pagesDash.getAllPage.useQuery();
-  const pages = showPageData.data;
+  const showPageData2 = api.pagesDash.getAllPage.useQuery();
+  const pages = showPageData2.data;
   const matchingData = pages?.find((item) => item.title === slug?.toString());
   const matchID = matchingData?.id;
-  return matchID;
-};
-
-const Subpages: NextPage = () => {
-  const pageIDs: any = getIDFromURL();
+  
+  const pageIDs: any = matchID;
 
   const showPageData = api.subPageService.getPageByPageID.useQuery({
     pagesId: pageIDs,

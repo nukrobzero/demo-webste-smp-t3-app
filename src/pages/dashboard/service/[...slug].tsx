@@ -14,8 +14,8 @@ const Subpages: NextPage = () => {
   const pages = showPageData2.data;
   const matchingData = pages?.find((item) => item.title === slug?.toString());
   const matchID = matchingData?.id;
-  
-  const pageIDs: any = matchID;
+
+  const pageIDs: string = matchID !== undefined ? matchID.toString() : "";
 
   const showPageData = api.subPageService.getPageByPageID.useQuery({
     pagesId: pageIDs,

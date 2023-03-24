@@ -7,7 +7,7 @@ import {
 } from "~/server/api/trpc";
 
 export const pagesDashRouter = createTRPCRouter({
-  getAllPage: publicProcedure.query(({ ctx }) => {
+  getAllPage: publicProcedure.query(async ({ ctx }) => {
     return ctx.prisma.pages.findMany();
   }),
 
@@ -17,7 +17,7 @@ export const pagesDashRouter = createTRPCRouter({
         pageId: z.string(),
       })
     )
-    .mutation(({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       return ctx.prisma.pages.findUnique({
         where: {
           id: input.pageId,
@@ -31,7 +31,7 @@ export const pagesDashRouter = createTRPCRouter({
         title: z.string(),
       })
     )
-    .mutation(({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       return ctx.prisma.pages.create({
         data: {
           title: input.title,
@@ -46,7 +46,7 @@ export const pagesDashRouter = createTRPCRouter({
         title: z.string(),
       })
     )
-    .mutation(({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       return ctx.prisma.pages.update({
         where: {
           id: input.id,
@@ -63,7 +63,7 @@ export const pagesDashRouter = createTRPCRouter({
         id: z.string(),
       })
     )
-    .mutation(({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       return ctx.prisma.pages.delete({
         where: {
           id: input.id,

@@ -14,7 +14,7 @@ export const getIDFromURL = () => {
   const pages = showPageData.data;
   const matchingData = pages?.find((item) => item.title === slug?.toString());
 
-  return matchingData?.id || null;
+  return matchingData?.id || "";
 };
 
 const Subpages: NextPage = () => {
@@ -24,10 +24,9 @@ const Subpages: NextPage = () => {
     pagesId: pageIDs,
   });
   const submitPages = api.subPageService.createSubPage.useMutation();
-  const deletePage = api.pagesDash.deletePage.useMutation();
-  const updatePage = api.pagesDash.updatePage.useMutation();
+  const deletePage = api.subPageService.deleteSubPage.useMutation();
+  const updatePage = api.subPageService.updateSubPage.useMutation();
   const page = showPageData?.data;
-  console.log(page);
 
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
@@ -171,7 +170,6 @@ const Subpages: NextPage = () => {
           titleName={checkEdit === 1 ? "Update Page" : "Create Page"}
         />
       )}
-      ;
     </div>
   );
 };
